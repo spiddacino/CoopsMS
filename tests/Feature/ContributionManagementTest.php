@@ -2,21 +2,28 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Contribution;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ContributionManagementTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $response = $this->get('/');
+    use RefreshDatabase;
 
-        $response->assertStatus(200);
+    /** @test */
+    public function contribution_can_be_added()
+    {
+
+       $this->withoutExceptionHandling();
+
+       $response = $this->post('/contributions', [
+            'contribution' => '10',
+        ]);
+
+        //  assertions
+        $response->assertOk();
+        $this->assertCount(1, Contribution::all());
     }
+    
 }

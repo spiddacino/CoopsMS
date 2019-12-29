@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,10 +13,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Auth::routes();
+Route::post('/contributions', 'ContributionsController@store');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Auth::routes();
